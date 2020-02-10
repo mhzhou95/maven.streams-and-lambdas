@@ -2,9 +2,11 @@ package com.github.curriculeon.anthropoid;
 
 import com.github.curriculeon.tools.RandomUtils;
 import com.github.curriculeon.tools.StringUtils;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -38,18 +40,20 @@ public final class PersonFactory {
      * @return - ArrayList of Person objects
      */ // TODO
     public List<Person> createPersonList(int listSize) {
-        return null;
+        Stream<Person> personStream = createPersonStream(listSize);
+        List<Person> personList = personStream.collect(Collectors.toList());
+        return personList;
     }
-
 
     /**
      * @param arrayLength - number of Person objects to create
      * @return - Array of Person objects
      */ // TODO
     public Person[] createPersonArray(int arrayLength) {
-        return null;
+        List<Person> personList = createPersonList(arrayLength);
+         Person[] personArray = personList.toArray(new Person[0]);
+        return personArray;
     }
-
 
     /**
      * Section 8.2
@@ -58,6 +62,7 @@ public final class PersonFactory {
      * @return - Stream representation of collection of Person objects
      */ // TODO
     public Stream<Person> createPersonStream(int streamCount) {
-        return null;
+        return Stream.generate(this::createRandomPerson).limit(streamCount);
     }
+
 }
