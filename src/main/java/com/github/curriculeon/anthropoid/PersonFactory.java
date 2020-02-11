@@ -64,5 +64,4 @@ public final class PersonFactory {
     public Stream<Person> createPersonStream(int streamCount) {
         return Stream.generate(this::createRandomPerson).limit(streamCount);
     }
-
 }
